@@ -3,16 +3,42 @@ define(function() {
 
     var FileItem = hr.View.extend({
         tagName: "li",
+        events: {
+            "click .filename": "onClick"
+        },
 
         initialize: function(options) {
             FileItem.__super__.initialize.apply(this, arguments);
 
             this.tree = null;
+
+            this.$name = $("<span>", {
+                "class": "filename"
+            });
+            this.$name.appendTo(this.$el);
         },
 
         render: function() {
-            this.$el.html(this.model.get("name"));
+            this.$name.text(this.model.get("name"));
+
             return this.ready();
+        },
+
+        onClick: function(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            if (this.model.isDirectory()) {
+                if (!this.tree) {
+                    this.tree = new FilesTree({ model: this.model });
+                    this.tree.appendTo(this);
+                    this.tree.refresh();
+                } else {
+                    this.tree.$el.toggleClass("hidden");
+                }
+            }
         }
     });
 
