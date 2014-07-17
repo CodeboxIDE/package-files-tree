@@ -1,4 +1,3 @@
-package-files-tree
-==================
+# Files Tree
 
-Lateral files tree
+This package contains the lateral bar files tree.
