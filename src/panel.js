@@ -4,6 +4,8 @@ define([
     var hr = codebox.require("hr/hr");
 
     var Panel = hr.View.extend({
+        className: "component-files-panel",
+
         initialize: function(options) {
             Panel.__super__.initialize.apply(this, arguments);
 
