@@ -1,5 +1,6 @@
 define([
-    "src/panel"
+    "src/panel",
+    "less!src/stylesheets/main.less"
 ], function(Panel) {
     var panel = new Panel();
 

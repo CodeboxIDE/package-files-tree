@@ -44,6 +44,7 @@ define(function() {
 
     var FilesTree = hr.View.extend({
         tagName: "ul",
+        className: "component-files-tree",
 
         refresh: function() {
             var that = this;
