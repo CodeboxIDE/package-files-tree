@@ -20,6 +20,7 @@ define(function() {
 
         render: function() {
             this.$name.text(this.model.get("name"));
+            this.$el.css("margin-left", (this.parent.options.indentation*10)+"px");
 
             return this.ready();
         },
@@ -32,7 +33,10 @@ define(function() {
 
             if (this.model.isDirectory()) {
                 if (!this.tree) {
-                    this.tree = new FilesTree({ model: this.model });
+                    this.tree = new FilesTree({
+                        model: this.model,
+                        indentation: this.parent.options.indentation + 1
+                    });
                     this.tree.appendTo(this);
                     this.tree.refresh();
                 } else {
@@ -47,6 +51,9 @@ define(function() {
     var FilesTree = hr.View.extend({
         tagName: "ul",
         className: "component-files-tree",
+        defaults: {
+            indentation: 1
+        },
 
         refresh: function() {
             var that = this;
