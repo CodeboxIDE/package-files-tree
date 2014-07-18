@@ -38,6 +38,8 @@ define(function() {
                 } else {
                     this.tree.$el.toggleClass("hidden");
                 }
+            } else {
+                this.model.open();
             }
         }
     });
