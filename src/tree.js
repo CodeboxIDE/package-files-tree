@@ -4,7 +4,7 @@ define(function() {
     var FileItem = hr.View.extend({
         tagName: "li",
         events: {
-            "click .filename": "onClick"
+            "click .file": "onClick"
         },
 
         initialize: function(options) {
@@ -12,15 +12,28 @@ define(function() {
 
             this.tree = null;
 
+            this.$content = $("<div>", {
+                "class": "file"
+            });
+
+            this.$caret = $("<span>", {
+                "class": "caret"
+            });
+
             this.$name = $("<span>", {
                 "class": "filename"
             });
-            this.$name.appendTo(this.$el);
+
+            this.$caret.appendTo(this.$content);
+            this.$name.appendTo(this.$content);
+
+            this.$content.appendTo(this.$el);
         },
 
         render: function() {
+            this.$caret.toggleClass("c-hidden", !this.model.isDirectory());
             this.$name.text(this.model.get("name"));
-            this.$el.css("margin-left", (this.parent.options.indentation*10)+"px");
+            this.$content.css("padding-left", (this.parent.options.indentation*12)+"px");
 
             return this.ready();
         },
@@ -45,6 +58,8 @@ define(function() {
             } else {
                 this.model.open();
             }
+
+            this.$caret.toggleClass("open", !this.tree.$el.hasClass("hidden"));
         }
     });
 

@@ -1,18 +1,73 @@
+@caret-size: 4px;
+
 .component-files-panel {
     position: absolute;
     top: 0px;
     right: 0px;
     left: 0px;
     bottom: 0px;
+    padding-top: 6px;
+    padding-bottom: 6px;
 
     overflow: auto;
 
     color: @color-3;
     background: @color-1;
 
+    cursor: default;
+
+
     .component-files-tree {
         list-style: none;
         margin: 0px;
         padding: 0px;
+
+        li {
+            .file {
+                padding: 2px 0px;
+
+                .caret {
+                    display: inline-block;
+                    width: @caret-size*2;
+                    margin-right: 4px;
+                    height: 17px;
+                    float: left;
+
+                    &:before {
+                        content: ' ';
+                        height: 0;
+                        position: absolute;
+                        width: 0;
+                        border: 4px solid transparent;
+                        border-left-color: @color-3;
+                        margin-top: @caret-size;
+                        margin-left: @caret-size/2;
+                    }
+
+                    &.open:before {
+                        border-bottom: none;
+                        border-top: @caret-size solid @color-3;
+                        border-left: @caret-size solid transparent;
+                        border-right: @caret-size solid transparent;
+                        border-bottom-width: 0px;
+                        margin-top: @caret-size + (@caret-size/2);
+                        margin-left: 0px;
+                    }
+
+                    &.c-hidden:before {
+                        border-color: transparent;
+                    }
+                }
+
+                .filename {
+                    display: inline-block;
+                }
+
+
+                &:hover {
+                    background: rgba(0,0,0, 0.1);
+                }
+            }
+        }
     }
 }
