@@ -1,4 +1,5 @@
 define(function() {
+    var $ = codebox.require("hr/dom");
     var hr = codebox.require("hr/hr");
 
     var FileItem = hr.View.extend({
