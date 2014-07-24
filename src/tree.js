@@ -1,6 +1,8 @@
 define(function() {
     var $ = codebox.require("hr/dom");
     var hr = codebox.require("hr/hr");
+    var dialogs = codebox.require("utils/dialogs");
+    var menu = codebox.require("utils/menu");
 
     var FileItem = hr.View.extend({
         tagName: "li",
@@ -29,6 +31,12 @@ define(function() {
             this.$name.appendTo(this.$content);
 
             this.$content.appendTo(this.$el);
+
+            // Bind file changement
+            this.listenTo(this.model, "destroy", this.remove);
+
+            // Context menu
+            menu.add(this.$content, this.getContextMenu.bind(this));
         },
 
         render: function() {
@@ -61,6 +69,42 @@ define(function() {
             }
 
             this.$caret.toggleClass("open", !this.tree.$el.hasClass("hidden"));
+        },
+
+        // Generate the context menu items
+        getContextMenu: function() {
+            var items = [
+                {
+                    label: "Rename...",
+                    click: function() {
+
+                    }
+                }
+            ]
+
+            if (this.model.isDirectory()) {
+                items = items.concat([
+                    {
+                    label: "Delete Folder",
+                        click: this.doDelete.bind(this)
+                    }
+                ]);
+            } else {
+                items = items.concat([
+                    {
+                    label: "Delete File",
+                        click: this.doDelete.bind(this)
+                    }
+                ]);
+            }
+
+            return items;
+        },
+
+        // Delete this file/folder
+        doDelete: function() {
+            return dialogs.confirm("Delete "+(this.model.isDirectory()? "Folder": "file"))
+            .then(this.model.remove.bind(this.model));
         }
     });
 
