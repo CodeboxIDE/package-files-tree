@@ -5,8 +5,9 @@ define([
     var panel = new Panel();
 
     // Add panel to grid
-    codebox.app.grid.addView(panel, {
-        width: 20
+    codebox.panels.add({
+        title: "Files",
+        view: panel
     });
 
     // Render the panel
