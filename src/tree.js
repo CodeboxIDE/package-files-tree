@@ -115,11 +115,17 @@ define(function() {
             indentation: 1
         },
 
+        initialize: function(options) {
+            FilesTree.__super__.initialize.apply(this, arguments);
+
+            this.listenTo(this.model, "fs:files", this.refresh);
+        },
+
         refresh: function() {
             var that = this;
 
             _.each(this.items || [], function(item) {
-                item.destroy();
+                item.remove();
             });
 
             return this.model.list()
