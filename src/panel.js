@@ -30,6 +30,8 @@ define([
 
         // Generate the context menu items
         getContextMenu: function() {
+            var that = this;
+
             var items = [
                 {
                     label: "New File",
@@ -37,13 +39,18 @@ define([
                         return dialogs.prompt("Create a new file", "untitled")
                         .then(function(n) {
                             return File.create("./", n);
-                        });
+                        })
+                        .then(that.update.bind(that));
                     }
                 },
                 {
                     label: "New Folder",
                     click: function() {
-
+                        return dialogs.prompt("Create a new folder", "untitled")
+                        .then(function(n) {
+                            return File.mkdir("./", n);
+                        })
+                        .then(that.update.bind(that));
                     }
                 }
             ];
