@@ -79,7 +79,10 @@ define(function() {
                 {
                     label: "Rename...",
                     click: function() {
-
+                        return dialogs.prompt("New name:", that.model.get("name"))
+                        .then(function(n) {
+                            return that.model.rename(n);
+                        });
                     }
                 }
             ]
@@ -92,7 +95,7 @@ define(function() {
                     {
                         label: "New File",
                         click: function() {
-                            return dialogs.prompt("Create a new file", "untitled")
+                            return dialogs.prompt("Create a new file:", "untitled")
                             .then(function(n) {
                                 return that.model.create(n);
                             });
@@ -101,7 +104,7 @@ define(function() {
                     {
                         label: "New Folder",
                         click: function() {
-                            return dialogs.prompt("Create a new folder", "untitled")
+                            return dialogs.prompt("Create a new folder:", "untitled")
                             .then(function(n) {
                                 return that.model.mkdir(n);
                             });

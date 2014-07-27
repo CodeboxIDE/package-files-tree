@@ -36,7 +36,7 @@ define([
                 {
                     label: "New File",
                     click: function() {
-                        return dialogs.prompt("Create a new file", "untitled")
+                        return dialogs.prompt("Create a new file:", "untitled")
                         .then(function(n) {
                             return File.create("./", n);
                         })
@@ -46,7 +46,7 @@ define([
                 {
                     label: "New Folder",
                     click: function() {
-                        return dialogs.prompt("Create a new folder", "untitled")
+                        return dialogs.prompt("Create a new folder:", "untitled")
                         .then(function(n) {
                             return File.mkdir("./", n);
                         })
