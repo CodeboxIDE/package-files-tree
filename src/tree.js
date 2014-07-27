@@ -74,6 +74,7 @@ define(function() {
 
         // Generate the context menu items
         getContextMenu: function() {
+            var that = this;
             var items = [
                 {
                     label: "Rename...",
@@ -86,14 +87,38 @@ define(function() {
             if (this.model.isDirectory()) {
                 items = items.concat([
                     {
-                    label: "Delete Folder",
+                        type: "divider"
+                    },
+                    {
+                        label: "New File",
+                        click: function() {
+                            return dialogs.prompt("Create a new file", "untitled")
+                            .then(function(n) {
+                                return that.model.create(n);
+                            });
+                        }
+                    },
+                    {
+                        label: "New Folder",
+                        click: function() {
+                            return dialogs.prompt("Create a new folder", "untitled")
+                            .then(function(n) {
+                                return that.model.mkdir(n);
+                            });
+                        }
+                    },
+                    {
+                        type: "divider"
+                    },
+                    {
+                        label: "Delete Folder",
                         click: this.doDelete.bind(this)
                     }
                 ]);
             } else {
                 items = items.concat([
                     {
-                    label: "Delete File",
+                        label: "Delete File",
                         click: this.doDelete.bind(this)
                     }
                 ]);
