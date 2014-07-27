@@ -148,6 +148,7 @@ define(function() {
             FilesTree.__super__.initialize.apply(this, arguments);
 
             this.listenTo(this.model, "fs:files:created", this.refresh);
+            this.listenTo(this.model, "fs:files:deleted", this.refresh);
         },
 
         refresh: function() {
