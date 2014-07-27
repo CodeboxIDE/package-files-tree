@@ -4,6 +4,7 @@ define(function() {
     var dialogs = codebox.require("utils/dialogs");
     var menu = codebox.require("utils/menu");
 
+
     var FileItem = hr.View.extend({
         tagName: "li",
         events: {
