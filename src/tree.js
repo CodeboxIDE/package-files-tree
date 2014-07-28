@@ -1,4 +1,6 @@
-define(function() {
+define([
+    "src/settings"
+], function(settings) {
     var $ = codebox.require("hr/dom");
     var hr = codebox.require("hr/hr");
     var dialogs = codebox.require("utils/dialogs");
@@ -36,16 +38,29 @@ define(function() {
             // Bind file changement
             this.listenTo(this.model, "destroy", this.remove);
 
+            // Bind settings changement
+            this.listenTo(settings.data, "change", this.onAdaptVisibility);
+
             // Context menu
             menu.add(this.$content, this.getContextMenu.bind(this));
         },
 
         render: function() {
+            this.onAdaptVisibility();
             this.$caret.toggleClass("c-hidden", !this.model.isDirectory());
             this.$name.text(this.model.get("name"));
             this.$content.css("padding-left", (this.parent.options.indentation*12)+"px");
 
             return this.ready();
+        },
+
+        onAdaptVisibility: function() {
+            var visible = true;
+            var name = this.model.get("name");
+
+            if (name == ".git" && !settings.data.get("showDotGit")) visible = false;
+            if (name[0] == "." && !settings.data.get("showHidden")) visible = false;
+            this.$el.toggle(visible);
         },
 
         onClick: function(e) {
