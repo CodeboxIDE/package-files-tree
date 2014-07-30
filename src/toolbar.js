@@ -27,11 +27,12 @@ define(function() {
                 var $command = $("<a>", {
                     'href': "#",
                     'title': command.title,
-                    'class': "toolbar-command"
+                    'class': "toolbar-command",
+                    'html': "<i class='octicon octicon-"+command.icon+"'></i>"
                 });
+
                 $command.click(function(e) {
                     if (e) e.preventDefault();
-
                     commands.run(command.command);
                 });
 
