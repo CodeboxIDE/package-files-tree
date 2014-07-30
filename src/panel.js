@@ -71,6 +71,7 @@ define([
         // When settings changed
         onSettingsChanged: function() {
             this.toolbar.$el.toggle(settings.data.get("showToolbar"));
+            this.toolbar.setCommands(settings.data.get("toolbar"));
         }
     });
 
