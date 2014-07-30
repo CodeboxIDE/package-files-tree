@@ -1,6 +1,8 @@
 define([
-    "src/tree"
-], function(Tree) {
+    "src/settings",
+    "src/tree",
+    "src/toolbar"
+], function(settings, Tree, Toolbar) {
     var hr = codebox.require("hr/hr");
     var menu = codebox.require("utils/menu");
     var dialogs = codebox.require("utils/dialogs");
@@ -12,11 +14,19 @@ define([
         initialize: function(options) {
             Panel.__super__.initialize.apply(this, arguments);
 
+            // Toolbar
+            this.toolbar = new Toolbar({}, this);
+            this.toolbar.appendTo(this);
+
             // Add files tree
             this.tree = new Tree({
                 model: codebox.root
-            });
+            }, this);
             this.tree.appendTo(this);
+
+            // Settings update
+            this.listenTo(settings.data, "change", this.onSettingsChanged);
+            this.onSettingsChanged();
 
             // Context menu
             menu.add(this.$el, this.getContextMenu.bind(this));
@@ -57,6 +67,11 @@ define([
 
             return items;
         },
+
+        // When settings changed
+        onSettingsChanged: function() {
+            this.toolbar.$el.toggle(settings.data.get("showToolbar"));
+        }
     });
 
     return Panel;

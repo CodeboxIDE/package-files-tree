@@ -4,6 +4,11 @@ define(function() {
             "title": "Files Tree",
             "type": "object",
             "properties": {
+                "showToolbar": {
+                    "description": "Show toolbar",
+                    "type": "boolean",
+                    "default": true
+                },
                 "showHidden": {
                     "description": "Show hidden files",
                     "type": "boolean",
