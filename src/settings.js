@@ -10,24 +10,17 @@ define(function() {
                     "items": {
                         "command": {
                             "type": "string"
-                        },
-                        "title": {
-                            "type": "string"
-                        },
-                        "icon": {
-                            "type": "string"
                         }
                     },
                     "default": [
                         {
-                            "command": "terminal.open",
-                            "title": "Open New Terminal",
-                            "icon": "terminal"
+                            "command": "terminal.open"
                         },
                         {
-                            "command": "settings.open",
-                            "title": "Open Settings",
-                            "icon": "gear"
+                            "command": "settings.open"
+                        },
+                        {
+                            "command": "run.project"
                         }
                     ]
                 },
