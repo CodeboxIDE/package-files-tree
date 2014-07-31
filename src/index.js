@@ -4,6 +4,7 @@ define([
 ], function(Panel) {
     // Open file panels
     codebox.panels.add(Panel, {}, {
-        title: "Files"
+        title: "Files",
+        icon: "file-directory"
     });
 });
