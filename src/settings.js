@@ -25,16 +25,6 @@ define(function() {
                             "icon": "terminal"
                         },
                         {
-                            "command": "find.code",
-                            "title": "Search Code",
-                            "icon": "search"
-                        },
-                        {
-                            "command": "palette.open",
-                            "title": "Open Command Palette",
-                            "icon": "keyboard"
-                        },
-                        {
                             "command": "settings.open",
                             "title": "Open Settings",
                             "icon": "gear"
