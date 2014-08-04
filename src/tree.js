@@ -129,6 +129,13 @@ define([
                         type: "divider"
                     },
                     {
+                        label: "Refresh List",
+                        click: this.doRefresh.bind(this)
+                    },
+                    {
+                        type: "divider"
+                    },
+                    {
                         label: "Delete Folder",
                         click: this.doDelete.bind(this)
                     }
@@ -149,6 +156,11 @@ define([
         doDelete: function() {
             return dialogs.confirm("Delete "+(this.model.isDirectory()? "Folder": "file"))
             .then(this.model.remove.bind(this.model));
+        },
+
+        // Refresh list
+        doRefresh: function() {
+            if (this.tree) this.tree.refresh();
         }
     });
 

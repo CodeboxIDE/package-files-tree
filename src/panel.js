@@ -62,6 +62,13 @@ define([
                         })
                         .then(that.update.bind(that));
                     }
+                },
+                {
+                    type: "divider"
+                },
+                {
+                    label: "Refresh Tree",
+                    click: that.tree.refresh.bind(that.tree)
                 }
             ];
 
