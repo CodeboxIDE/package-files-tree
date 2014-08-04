@@ -6,6 +6,7 @@ define([
     var hr = codebox.require("hr/hr");
     var menu = codebox.require("utils/menu");
     var dialogs = codebox.require("utils/dialogs");
+    var upload = codebox.require("utils/upload");
     var File = codebox.require("models/file");
 
     var Panel = hr.View.extend({
@@ -62,6 +63,44 @@ define([
                         })
                         .then(that.update.bind(that));
                     }
+                },
+                {
+                    type: "divider"
+                },
+                {
+                    label: "Upload",
+                    type: "menu",
+                    items: [
+                        {
+                            label: "Files",
+                            click: function() {
+                                codebox.statusbar.progress(
+                                    upload.upload({
+                                        'url': "/rpc/fs/upload"
+                                    }),
+                                    {
+                                        prefix: "Uploading files"
+                                    }
+                                )
+                                .fail(dialogs.alert);
+                            }
+                        },
+                        {
+                            label: "Folder",
+                            click: function() {
+                                codebox.statusbar.progress(
+                                    upload.upload({
+                                        'url': "/rpc/fs/upload",
+                                        'directory': true
+                                    }),
+                                    {
+                                        prefix: "Uploading folder"
+                                    }
+                                )
+                                .fail(dialogs.alert);
+                            }
+                        }
+                    ]
                 },
                 {
                     type: "divider"

@@ -130,23 +130,45 @@ define([
                         type: "divider"
                     },
                     {
-                        label: "Upload files",
-                        click: function() {
-                            codebox.statusbar.progress(
-                                upload.upload({
-                                    'url': "/rpc/fs/upload",
-                                    'data': {
-                                        "path": that.model.get("path")
-                                    }
-                                }),
-                                {
-                                    prefix: "Uploading"
+                        label: "Upload",
+                        type: "menu",
+                        items: [
+                            {
+                                label: "Files",
+                                click: function() {
+                                    codebox.statusbar.progress(
+                                        upload.upload({
+                                            'url': "/rpc/fs/upload",
+                                            'data': {
+                                                "path": that.model.get("path")
+                                            }
+                                        }),
+                                        {
+                                            prefix: "Uploading files"
+                                        }
+                                    )
+                                    .fail(dialogs.alert);
                                 }
-                            )
-                            .then(function() {
-
-                            }, dialogs.alert);
-                        }
+                            },
+                            {
+                                label: "Folder",
+                                click: function() {
+                                    codebox.statusbar.progress(
+                                        upload.upload({
+                                            'url': "/rpc/fs/upload",
+                                            'directory': true,
+                                            'data': {
+                                                "path": that.model.get("path")
+                                            }
+                                        }),
+                                        {
+                                            prefix: "Uploading folder"
+                                        }
+                                    )
+                                    .fail(dialogs.alert);
+                                }
+                            }
+                        ]
                     },
                     {
                         type: "divider"
