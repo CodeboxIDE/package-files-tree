@@ -5,6 +5,7 @@ define([
     var hr = codebox.require("hr/hr");
     var dialogs = codebox.require("utils/dialogs");
     var menu = codebox.require("utils/menu");
+    var upload = codebox.require("utils/upload");
 
 
     var FileItem = hr.View.extend({
@@ -123,6 +124,28 @@ define([
                             .then(function(n) {
                                 return that.model.mkdir(n);
                             });
+                        }
+                    },
+                    {
+                        type: "divider"
+                    },
+                    {
+                        label: "Upload files",
+                        click: function() {
+                            codebox.statusbar.progress(
+                                upload.upload({
+                                    'url': "/rpc/fs/upload",
+                                    'data': {
+                                        "path": that.model.get("path")
+                                    }
+                                }),
+                                {
+                                    prefix: "Uploading"
+                                }
+                            )
+                            .then(function() {
+
+                            }, dialogs.alert);
                         }
                     },
                     {
