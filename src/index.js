@@ -1,10 +1,8 @@
-define([
-    "src/panel",
-    "less!src/stylesheets/main.less"
-], function(Panel) {
-    // Open file panels
-    codebox.panels.add(Panel, {}, {
-        title: "Files",
-        icon: "file-directory"
-    });
+require("./stylesheets/main.less");
+var Panel = require("./panel");
+
+// Open file panels
+codebox.panels.add(Panel, {}, {
+    title: "Files",
+    icon: "file-directory"
 });
