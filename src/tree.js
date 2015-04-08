@@ -85,7 +85,7 @@ var FileItem = View.extend({
             this.model.open();
         }
 
-        this.$caret.toggleClass("open", !this.tree.$el.hasClass("hidden"));
+        if (this.tree) this.$caret.toggleClass("open", !this.tree.$el.hasClass("hidden"));
     },
 
     // Generate the context menu items
