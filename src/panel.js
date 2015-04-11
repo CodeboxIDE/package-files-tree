@@ -7,6 +7,7 @@ var menu = codebox.require("utils/menu");
 var dialogs = codebox.require("utils/dialogs");
 var upload = codebox.require("utils/upload");
 var File = codebox.require("models/file");
+var commands = codebox.require("core/commands");
 
 var Panel = View.extend({
     className: "component-files-panel",
@@ -26,6 +27,7 @@ var Panel = View.extend({
 
         // Settings update
         this.listenTo(settings.data, "change", this.onSettingsChanged);
+        this.listenTo(commands, "context", this.onFileChanged);
         this.onSettingsChanged();
 
         // Context menu
@@ -117,6 +119,15 @@ var Panel = View.extend({
     onSettingsChanged: function() {
         this.toolbar.$el.toggle(settings.data.get("showToolbar"));
         this.toolbar.setCommands(settings.data.get("toolbar"));
+    },
+
+    // When current context changed
+    onFileChanged: function(ctx) {
+        this.tree.$(".file[data-filepath]").removeClass("active");
+
+        if (ctx.type == "editor") {
+            this.tree.$(".file[data-filepath='"+ctx.data.model.get("path")+"']").addClass("active");
+        }
     }
 });
 

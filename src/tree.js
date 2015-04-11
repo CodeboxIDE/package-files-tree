@@ -50,6 +50,7 @@ var FileItem = View.extend({
         this.onAdaptVisibility();
         this.$caret.toggleClass("c-hidden", !this.model.isDirectory());
         this.$name.text(this.model.get("name"));
+        this.$content.attr("data-filepath", this.model.get("path"));
         this.$content.css("padding-left", (this.parent.options.indentation*12)+"px");
 
         return this.ready();
