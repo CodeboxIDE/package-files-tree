@@ -4,7 +4,7 @@
     "description": "Lateral Files Tree",
     "browser": "./src/index.js",
     "engines": {
-        "codebox": ">=1.0.0"
+        "codebox": ">=1.0.0-alpha"
     },
     "packageDependencies": {
         "panels": "CodeboxIDE/package-panels"
